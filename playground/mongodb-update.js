@@ -9,6 +9,22 @@ MongoClient.connect("mongodb://localhost:27017/TodoApp", { useNewUrlParser: true
     console.log("Successfully connected to Db server!");
 
 
+    db.collection("Todos").findOneAndUpdate(
+        {_id: new ObjectID("5b967a7a1592650e853fb2e4")},
+        { $set: {completed: true} },
+        { returnOriginal: false }        
+    ).then((result) => {
+        console.log(result);
+    });
+
+    db.collection("Users").findOneAndUpdate(
+        {_id: new ObjectID("5b967d40e048770eb709c61d")},
+        {
+            $set: {name: "Mimırt"},
+            $inc: {age: -1}
+        },
+        {returnOriginal:false}
+    );
 
 
 
@@ -20,9 +36,6 @@ MongoClient.connect("mongodb://localhost:27017/TodoApp", { useNewUrlParser: true
 
 
 
-
-
-    
 
 
   // deleteMany
