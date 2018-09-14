@@ -9,23 +9,28 @@ let { User } = require("./models/user");
 var app = express();
 app.use(bodyParser.json());
 
-app.post("/todos", (req, res) => {
-    let newtodo = new Todo({
+app.post('/todos', (req, res) => {
+    var todo = new Todo({
         text: req.body.text
     });
 
-    console.log(req.body);
-
-    newtodo.save().then((doc) => {
+    todo.save().then((doc) => {
         res.status(201).send(doc);
     }, (e) => {
         res.status(400).send(e);
     });
-
-    //res.send({text: "hi client!"});
-
-
 });
+
+app.get("/todos", (req, res) => {
+    Todo.find().then((todos) => {
+        res.send({ todos });
+    }, (err) => {
+        res.status(404).send(e);
+    });
+});
+
+
+console.log(app.settings.env);
 
 app.listen(port, () => {
     console.log(`App is running on ${port}`);
@@ -34,3 +39,12 @@ app.listen(port, () => {
 //let newTodo = new Todo({ text: "take child from school" });
 
 //newTodo.save().then(() => { console.log("Added todo", newTodo); }, (e) => { console.log("Unable to save: ", e); });
+
+module.exports = {
+    app
+};
+
+
+
+
+/**"start": "NODE_ENV=production node server/server.js"**/
