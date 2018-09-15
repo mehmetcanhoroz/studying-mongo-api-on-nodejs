@@ -21,6 +21,17 @@ app.post('/todos', (req, res) => {
     });
 });
 
+/*app.route('/book')
+    .get(function (req, res) {
+        res.send('Get a random book')
+    })
+    .post(function (req, res) {
+        res.send('Add a book')
+    })
+    .put(function (req, res) {
+        res.send('Update the book')
+    });*/
+
 app.get("/todos", (req, res) => {
     Todo.find().then((todos) => {
         res.send({ todos });
